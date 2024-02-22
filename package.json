@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --config .prettierrc --write \"**/**/**/*.{ts,tsx,json}\""
   },
   "dependencies": {
     "cypress": "^13.6.5",

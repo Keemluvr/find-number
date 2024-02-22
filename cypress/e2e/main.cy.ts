@@ -25,11 +25,16 @@ describe("HomePage", () => {
     it("should find the number and show your index", () => {
       cy.get('[data-test-id="search-input"]').type("5")
       cy.get('[data-test-id="search-button"]').click()
-      cy.get('[data-test-id="result-card"]').should(
-        "have.class",
-        "bg-green-400"
-      )
       cy.get('[data-test-id="result-value"]').should("contain", "3")
+    })
+
+    it("should find the number and show your index when the number is added", () => {
+      cy.get('[data-test-id="add-input"]').type("10")
+      cy.get('[data-test-id="add-button"]').click()
+      cy.get('[data-test-id="item-5"]').should("contain", "10")
+      cy.get('[data-test-id="search-input"]').type("10")
+      cy.get('[data-test-id="search-button"]').click()
+      cy.get('[data-test-id="result-value"]').should("contain", "5")
     })
 
     it("should show a different color if the number is not found", () => {

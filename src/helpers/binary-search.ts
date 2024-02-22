@@ -1,11 +1,13 @@
 export default (nums: number[], numToFind: number): number => {
-  let left: number = 0
-  let right: number = nums.length - 1
+  if (!nums || nums.length === 0) return -1
+  
+  let left = 0;
+  let right = nums.length - 1;
 
   while (left <= right) {
-    let middle: number = ~~Math.floor(left + (right - left) / 2)
+    const middle = Math.floor((left + right) / 2)
 
-    if (nums[middle] === numToFind) return middle
+    if (nums[middle] === numToFind) return middle 
     else if (nums[middle] < numToFind) left = middle + 1
     else right = middle - 1
   }

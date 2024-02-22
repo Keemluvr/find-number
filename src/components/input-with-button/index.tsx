@@ -1,10 +1,14 @@
 type InputWithButtonProps = {
   buttonLabel: string
-  onChange: (ecvt: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
   OnPressButton: React.MouseEventHandler<HTMLButtonElement>
   type: React.HTMLInputTypeAttribute | undefined
-  onPressKey: React.KeyboardEventHandler<HTMLInputElement>
-  disableButton: boolean
+  onPressKey: (evt: React.KeyboardEvent<HTMLInputElement>) => void
+  disableButton?: boolean
+  style?: {
+    container: string
+  }
+  value?: number
 }
 
 const InputWithButton = ({
@@ -13,16 +17,19 @@ const InputWithButton = ({
   onChange,
   OnPressButton,
   onPressKey,
-  disableButton
+  disableButton = false,
+  style,
+  value
 }: InputWithButtonProps) => {
   return (
-    <div className="group w-72 md:w-80 lg:w-96">
+    <div className={`group w-72 md:w-80 lg:w-96 ${style?.container}`}>
       <div className="relative flex items-center">
         <input
           type={type}
-          className="peer relative h-10 w-full rounded-md bg-gray-50 pl-4 pr-20 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg"
+          className="peer relative h-11 w-full rounded-md bg-gray-50 pl-4 pr-20 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg"
           onChange={(evt) => onChange(evt)}
-          onKeyDown={onPressKey}
+          onKeyDown={(evt) => onPressKey(evt)}
+          value={value ?? ""}
           data-test-id={`${buttonLabel.toLowerCase()}-input`}
         />
         <button
